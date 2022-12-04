@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.20"
     application
+    id("io.qameta.allure") version "2.11.2"
 }
 
 group = "org.example"
@@ -13,12 +14,22 @@ repositories {
 }
 
 dependencies {
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
+
 }
+
+allure {
+    report{
+        version.set("2.20.1")
+    }
+}
+
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy("allureReport")
 }
 
 tasks.withType<KotlinCompile> {
