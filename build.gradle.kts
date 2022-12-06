@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
 

@@ -3,12 +3,17 @@ import data.Task
 import data.TasksRepositoryMemory
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-val repository = TasksRepositoryMemory()
 
 class Tests {
 
+   lateinit var repository: TasksRepositoryMemory
+            @BeforeEach
+    fun beforeMethod() {
+        repository = TasksRepositoryMemory()
+    }
     @Test
     fun addTaskAndItAppearsInTheListTest() {
         repository.addTask(Task(name = "first", priority = Priority.MEDIUM))
