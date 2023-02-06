@@ -9,6 +9,7 @@ plugins {
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
+val springVersion = "2.7.6"
 
 repositories {
     mavenCentral()
@@ -18,11 +19,17 @@ repositories {
 dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
-
-    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
+//    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
+//
+   testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
     testImplementation("io.kotest:kotest-assertions-core:5.5.4")
     testImplementation("io.kotest.extensions:kotest-extensions-allure:1.2.0")
+//
+//    implementation("org.springframework.boot:spring-boot-starter-web:$springVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.platform:junit-platform-suite:1.8.1")
+    testImplementation("io.cucumber:cucumber-java8:7.0.0")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.0.0")
 
 
 }
@@ -55,12 +62,12 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 tasks.test {
     useJUnitPlatform()
     finalizedBy("allureReport")
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
-
 
 application {
     mainClass.set("MainKt")
