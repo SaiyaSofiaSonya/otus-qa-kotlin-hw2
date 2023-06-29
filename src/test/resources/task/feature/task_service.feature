@@ -20,3 +20,12 @@ Feature: TaskService
     Given Init repo
     When I add a list of task
     Then Tasks are sorted by priority
+
+
+  Scenario: Size changing when adding or removing the task
+    Given Init repo
+    Then Task list is empty
+    When I add task
+    Then Task list size equals to 1
+    When I remove task
+    Then Task list is empty

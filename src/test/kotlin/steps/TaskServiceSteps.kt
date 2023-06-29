@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 import kotlin.properties.Delegates
 import kotlin.test.assertEquals
 
-class TaskServiceSteps: En {
+class TaskServiceSteps : En {
 
     init {
         lateinit var repository: TasksRepositoryMemory
@@ -41,6 +41,12 @@ class TaskServiceSteps: En {
             }
         }
 
+        When("I remove task") {
+            id = repository.getTasks().first().id!!
+            repository.deleteTask(id)
+        }
+
+
         Then("Tasks are sorted by name") {
             listOfTasks.sortByDescending { it.name }
             repository.tasks.first().name shouldBeEqualComparingTo listOfTasks.first().name
@@ -58,15 +64,21 @@ class TaskServiceSteps: En {
         Then("It has the same name and priority") {
             assertEquals(testTask.name, repository.getTasks().last().name)
             assertEquals(testTask.priority, repository.getTasks().last().priority)
-
         }
 
         Then("Task has completed property") {
-                repository.getTasks().first { it.id == id }.completed shouldBe true
-                repository.getTasks(true).size shouldBeEqualComparingTo 1
+            repository.getTasks().first { it.id == id }.completed shouldBe true
+            repository.getTasks(true).size shouldBeEqualComparingTo 1
 
         }
 
+        Then("Task list is empty") {
+            repository.getTasks().size shouldBeEqualComparingTo 0
+        }
+
+        Then("Task list size equals to {int}") {int: Int ->
+            repository.getTasks().size shouldBeEqualComparingTo int
+        }
 
     }
 }

@@ -1,4 +1,3 @@
-
 import data.Priority
 import data.Task
 import data.TasksRepositoryMemory
@@ -27,8 +26,8 @@ class HomeWork4Behavior : BehaviorSpec({
 
 
             then("Task is created and appears in the list test") {
-                repository.getTasks().last().name  shouldBeEqualComparingTo testTask.name
-                repository.getTasks().last().priority  shouldBeEqualComparingTo testTask.priority
+                repository.getTasks().last().name shouldBeEqualComparingTo testTask.name
+                repository.getTasks().last().priority shouldBeEqualComparingTo testTask.priority
             }
         }
 
